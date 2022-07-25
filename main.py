@@ -5,8 +5,34 @@ from model import *
 from torchattacks import *
 from visualization import *
 from robust_eval import *
+import argparse
 
 if __name__ is "__main__":
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--main_folder_path')
+    parser.add_argument('--num_clients', default=5)
+    parser.add_argument('--train_batch_size', default=64)
+    parser.add_argument('--test_batch_size', default=64)
+
+    parser.add_argument('--num_selected', default=5)
+    parser.add_argument('--num_attack', default=1)
+    parser.add_argument('--num_rounds', default=10)
+    parser.add_argument('--num_local_epochs', default=5)
+    parser.add_argument('--clean_train_batch_ratio', default=5)
+    parser.add_argument('--atk', default=FFGSM(white_model, eps=8/255, alpha=10/255))
+
+    args = parser.parse_args()
+    num_clients = args.num_clients
+    train_batch_size = args.train_batch_size
+    test_batch_size = args.test_batch_sie
+
+    num_selected = args.num_selected
+    num_attack = args.num_attack
+    num_rounds = args.num_rounds
+    num_local_epochs = args.num_local_epochs
+    clean_train_batch_ratio = args.clean_train_batch_ratio
+
     # *********************************************************************************************************
     # Data Preprocessing
     # *********************************************************************************************************
@@ -14,9 +40,9 @@ if __name__ is "__main__":
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # Hyperparameters
-    num_clients = 5
-    train_batch_size = 64
-    test_batch_size = 64
+    # num_clients = 5
+    # train_batch_size = 64
+    # test_batch_size = 64
 
     dataset, classes = preprocessing(main_folder_path=main_folder_path)
     train_loader_list, client_loader_dict, test_loader, _, nk_n_list = dataloader(dataset, classes, train_batch_size, test_batch_size, num_clients)
@@ -33,12 +59,11 @@ if __name__ is "__main__":
     # *********************************************************************************************************
     
     # Hyperparameters
-    num_selected = 4
-    num_attack = 1
-    num_rounds = 10
-    num_local_epochs = 5
-
-    clean_train_batch_ratio = 0.75
+    # num_selected = 4
+    # num_attack = 1
+    # num_rounds = 10
+    # num_local_epochs = 5
+    # clean_train_batch_ratio = 0.75
 
     print("Total number of clients: ", num_clients)
     print("No. client selected each round: ", num_selected)
@@ -51,8 +76,7 @@ if __name__ is "__main__":
     # White-box models: AlexNet
     white_model = models.alexnet(pretrained=True).to(device)
     
-    # torchattack list
-    atk_list = [ 
+    atk_list = [ # torchattack list
         FGSM(white_model, eps=8/255),
     #     BIM(white_model, eps=8/255, alpha=100, steps=100),
     #     RFGSM(white_model, eps=8/255, alpha=2/255, steps=100),
@@ -73,7 +97,8 @@ if __name__ is "__main__":
     #     DIFGSM(white_model, eps=8/255)
     ]
 
-    atk = FFGSM(white_model, eps=8/255, alpha=10/255) # Adversarial Training Method
+    atk = args.atk
+    # atk = FFGSM(white_model, eps=8/255, alpha=10/255) # Adversarial Training Method
     start_time = time.time()
     global_model, glob_acc_list, robust_acc_list, glob_loss_list, robust_loss_list, id_loss_dict = federated_learning(atk, 
                                                                                                                     test_loader,
