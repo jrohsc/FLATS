@@ -51,7 +51,8 @@ if __name__ is "__main__":
     # White-box models: AlexNet
     white_model = models.alexnet(pretrained=True).to(device)
     
-    atk_list = [ # torchattack list
+    # torchattack list
+    atk_list = [ 
         FGSM(white_model, eps=8/255),
     #     BIM(white_model, eps=8/255, alpha=100, steps=100),
     #     RFGSM(white_model, eps=8/255, alpha=2/255, steps=100),
