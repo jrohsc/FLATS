@@ -23,6 +23,9 @@ if __name__ is "__main__":
     parser.add_argument('--atk', default=FFGSM(white_model, eps=8/255, alpha=10/255))
 
     args = parser.parse_args()
+
+    # Hyperparameters
+    main_folder_path = args.main_folder_path
     num_clients = args.num_clients
     train_batch_size = args.train_batch_size
     test_batch_size = args.test_batch_sie
@@ -33,16 +36,25 @@ if __name__ is "__main__":
     num_local_epochs = args.num_local_epochs
     clean_train_batch_ratio = args.clean_train_batch_ratio
 
+    print("*"*100)
+    print("main_folder_path: ", main_folder_path)
+    print("num_clients: ", num_clients)
+    print("train_batch_size: ", train_batch_size)
+    print("test_batch_size: ", test_batch_size)
+    print("")
+
+    print("num_selected: ", num_selected)
+    print("num_attack: ", num_attack)
+    print("num_rounds: ", num_rounds)
+    print("num_local_epochs: ", num_local_epochs)
+    print("clean_train_batch_ratio: ", clean_train_batch_ratio)
+    print("*"*100)
+    print("")
+
     # *********************************************************************************************************
     # Data Preprocessing
     # *********************************************************************************************************
-    main_folder_path = 'pins_face_recognition_105_classes'
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
-    # Hyperparameters
-    # num_clients = 5
-    # train_batch_size = 64
-    # test_batch_size = 64
 
     dataset, classes = preprocessing(main_folder_path=main_folder_path)
     train_loader_list, client_loader_dict, test_loader, _, nk_n_list = dataloader(dataset, classes, train_batch_size, test_batch_size, num_clients)
@@ -57,17 +69,6 @@ if __name__ is "__main__":
     # *********************************************************************************************************
     # Robust Federated Learning
     # *********************************************************************************************************
-    
-    # Hyperparameters
-    # num_selected = 4
-    # num_attack = 1
-    # num_rounds = 10
-    # num_local_epochs = 5
-    # clean_train_batch_ratio = 0.75
-
-    print("Total number of clients: ", num_clients)
-    print("No. client selected each round: ", num_selected)
-
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     global_model = black_box_model(num_classes=num_classes).to(device)
     client_model_list = [black_box_model(num_classes=num_classes).to(device) for _ in range(num_clients)]
@@ -97,7 +98,10 @@ if __name__ is "__main__":
     #     DIFGSM(white_model, eps=8/255)
     ]
 
+    # Attack received from parsing
     atk = args.atk
+    print("atk: ", atk)
+
     # atk = FFGSM(white_model, eps=8/255, alpha=10/255) # Adversarial Training Method
     start_time = time.time()
     global_model, glob_acc_list, robust_acc_list, glob_loss_list, robust_loss_list, id_loss_dict = federated_learning(atk, 
