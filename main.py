@@ -8,7 +8,6 @@ from robust_eval import *
 import argparse
 
 if __name__ is "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--main_folder_path')
     parser.add_argument('--num_clients', default=5)
