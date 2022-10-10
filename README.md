@@ -1,6 +1,8 @@
-# Robust Federated Learning in Smart Home Face Recognition System
+# FLATS: <ins>F</ins>ederated <ins>L</ins>earning <ins>A</ins>dversarial <ins>T</ins>raining for <ins>S</ins>mart Home Face Recognition System
 
-* The purpose of this project is to experiment the robustness of federated learning in smart home face recognition system.
+* This is the official repository of the code of **"<ins>Stay Home Safe with Starving Federated Data</ins>"** paper accepted by the [IEEE International Conference on Universal Village (IEEE UV2022)](https://universalvillage.org/).
+* We propose a novel robust federated learninng training method for smart home face recognition system named <ins>**FLATS: Federated Learning Adversarial Training for Smart Home Face Recognition System.**</ins>
+* For general overview of the training process, take a look at the <ins>**notebook/FLATS.ipynb**</ins> file.
 * The code will be continously updated.
 
 ## LICENSES
