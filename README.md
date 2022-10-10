@@ -8,7 +8,7 @@
 
 ## Run
 
-Arguments that need to be parsed:
+Arguments to be parsed:
 * --main_folder_path             
 * --num_clients                  (default=5) 
 * --train_batch_size             (default=64)
