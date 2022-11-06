@@ -6,6 +6,7 @@
 * We propose a novel robust federated learninng training method for smart home face recognition system named <ins>**FLATS: Federated Learning Adversarial Training for Smart Home Face Recognition System.**</ins>
 * For general overview of the training process, take a look at the <ins>**notebook/FLATS.ipynb**</ins> file.
 * The code will be continously updated.
+* Oral Presentation Video Link: [https://youtu.be/Tj9QiJEUBXU](https://youtu.be/Tj9QiJEUBXU)
 
 ## LICENSES
 - Includes software related under the MIT and Apache 2.0 license
