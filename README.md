@@ -3,7 +3,7 @@
 <img align='right' width="350" alt="robust_FL_diagram_noniid" src="https://user-images.githubusercontent.com/56494297/201699788-ea7e5f33-dc48-4c12-a526-a8399c6d1e7e.png">
 
 
-* This is the official repository of the code of ["Stay Home Safe with Starving Federated Data"](https://arxiv.org/abs/2211.05410) paper, which has been accepted by the [IEEE International Conference on Universal Village (IEEE UV2022)](https://universalvillage.org/).
+* This is the official repository of the code of ["Robust Smart Home Face Recognition under Starving Federated Data"](https://arxiv.org/abs/2211.05410) paper, which has been accepted by the [IEEE International Conference on Universal Village (IEEE UV2022)](https://universalvillage.org/).
 * We propose a novel robust federated learninng training method for smart home face recognition system named <ins>**FLATS: Federated Learning Adversarial Training for Smart Home Face Recognition System.**</ins>
 * For general overview of the training process, take a look at the <ins>**notebook/FLATS.ipynb**</ins> file.
 * The code will be continously updated.
